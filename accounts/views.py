@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from django.shortcuts import redirect
 from django.contrib.auth.models import Group
+from .models import Student
 # Create your views here.
 
 
@@ -37,6 +38,8 @@ def login_page(request):
     return render(request,'accounts/login.html',context)
 
 def home(request):
-    context = {}
+    student = Student.objects.all()
+    context = {'students':student}
     return render(request,'accounts/home.html',context)
+
 

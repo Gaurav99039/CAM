@@ -1,0 +1,36 @@
+{% load static %}
+
+<style>
+  #hello-msg{
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+  }
+  .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    </button>
+    {% if request.user.is_staff %}
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="{}">Home</a>
+          <a class="nav-item nav-link" href="{}">Counsellors</a>
+          <a class="nav-item nav-link" href="{}">Essays</a>
+          <a class="nav-item nav-link" href="{}">About</a>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="d-flex align-items-center">
+      <span id="hello-msg">Hello, {{ request.user }}</span>
+      <a href="">Logout</a>
+      <a href=""><img src="{% static '/images/profile.png' %}" alt="Profile Picture" class="profile-img"></a>
+    </div>
+</nav>
