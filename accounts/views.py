@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import CreateUserFrom
 from django.contrib import messages
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import redirect
 from django.contrib.auth.models import Group
 from .models import Student
@@ -41,5 +41,15 @@ def home(request):
     student = Student.objects.all()
     context = {'students':student}
     return render(request,'accounts/home.html',context)
+
+def student_profile(request,pk):
+    student = Student.objects.get(id=pk)
+    context = {'student':student}
+    return render(request,'accounts/student_profile.html',context)
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
 
 

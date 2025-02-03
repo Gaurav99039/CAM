@@ -1,0 +1,85 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #007bff;
+        }
+        .info-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="profile-container">
+            <div class="text-center">
+                <img src="{{ student.profile_pic.url }}" alt="Profile Picture" class="profile-pic">
+                <h2 class="mt-3">{{ student.first_name }} {{ student.last_name }}</h2>
+                <p class="text-muted">Graduation Year: {{ student.graduation_year }}</p>
+            </div>
+
+            <div class="info-box">
+                <h5>📚 Subjects Enrolled:</h5>
+                <p>{{ student.no_of_subject }} subjects</p>
+            </div>
+
+            <div class="info-box">
+                <h5>📊 Grades:</h5>
+                <ul class="list-group">
+                    {% for subject, grade in student.grade.items %}
+                        <li class="list-group-item">{{ subject }}: <strong>{{ grade }}</strong></li>
+                    {% empty %}
+                        <li class="list-group-item text-muted">No grades available.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h5>🏆 Extracurricular Activities:</h5>
+                <ul class="list-group">
+                    {% for activity in student.extracurriculars %}
+                        <li class="list-group-item">{{ activity }}</li>
+                    {% empty %}
+                        <li class="list-group-item text-muted">No activities listed.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h5>📌 Application Status:</h5>
+                <p class="badge bg-info text-dark">{{ student.application_status }}</p>
+            </div>
+
+            <div class="info-box">
+                <h5>📝 Notes:</h5>
+                <p>{{ student.note|default:"No notes available." }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

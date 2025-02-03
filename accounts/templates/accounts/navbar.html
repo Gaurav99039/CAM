@@ -12,6 +12,17 @@
     border-radius: 50%;
     margin-left: 10px;
   }
+  /* Add styles for search form */
+  .search-form {
+    margin-right: 20px;
+  }
+  .search-form input {
+    background-color: black;
+    color: white;
+  }
+  .search-form input::placeholder {
+    color: #999;
+  }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -20,7 +31,7 @@
     {% if request.user.is_staff %}
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link" href="{}">Home</a>
+          <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
           <a class="nav-item nav-link" href="{}">Counsellors</a>
           <a class="nav-item nav-link" href="{}">Essays</a>
           <a class="nav-item nav-link" href="{}">About</a>
@@ -28,9 +39,14 @@
       {% endif %}
     </div>
 
+    <form class="d-flex search-form" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+
     <div class="d-flex align-items-center">
       <span id="hello-msg">Hello, {{ request.user }}</span>
-      <a href="">Logout</a>
+      <a href="{% url 'logout' %}">Logout</a>
       <a href=""><img src="{% static '/images/profile.png' %}" alt="Profile Picture" class="profile-img"></a>
     </div>
 </nav>
